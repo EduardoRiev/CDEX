@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct formatoEmail {
+  char nomeInicio[12];
+  char Arroba;
+  char nomeMeio[12];
+  char nomeFim[12];
+};
+  
+struct {
+    char nome[50];
+    char telefone[15];
+		struct formatoEmail email
+} agenda[200];
+
+int main(){
+  struct agenda;
+  int op, i = 0, alt;
+  char pcr[20];
+	double qtdContato;
+  int nomeContato;
+	char apc[50];
+  do{
+    printf("\nMenu de Opcoes");
+    printf("\n1 - Cadastrar ");
+    printf("\n2 - Quantidade de Contatos");
+    printf("\n3 - Filtrar");
+		printf("\n4 - Remover");
+    printf("\n5 - Listar");
+		printf("\n0 - Sair");
+    printf("\n\nDigite sua opcao: ");
+    scanf("%d", &op);
+    switch(op){
+      case 1:
+				printf("Informe nome: ");
+				scanf("%s", &agenda[i].nome);
+				printf("Informe telefone: ");
+				scanf("%s", &agenda[i].telefone);
+				printf("Informe e-mail: ");
+        scanf("%s@%s.%s", &agenda[i].email.nomeInicio, &agenda[i].email.nomeMeio, &agenda[i].email.nomeFim);
+        for(i=0;i < qtdContato;i++){
+          char telefone = agenda[i].telefone;
+          if (telefone != agenda[i].telefone) {
+            i++;
+				    qtdContato++;
+          }
+          else printf("Não foi possível inserir o contato.");
+      break;
+
+      case 2:
+      printf("\n---------------------------------\n");
+      printf("Sua agenda possui: %.f contato(s)", qtdContato);
+			printf("\nO percentual ocupado na agenda e: %.2f%%", (qtdContato*100) / 200);
+      printf("\n---------------------------------\n");
+      break;
+
+      case 3:
+      printf("\n1 - Buscar por telefone");
+		  printf("\n2 - Buscar por nome");
+      printf("\n3 - Buscar por e-mail");
+      printf("\n\nDigite sua opcao: ");
+      scanf("%d", &op);
+      
+      switch(op){
+			case 1:
+			printf("\nDigite o telefone para achar o contato: ");    
+			scanf("%s", pcr);
+			for(int i=0;i<qtdContato;i++){
+				if(pcr == agenda[i].telefone){
+					printf("Nome: %s \nTelefone: %s \nE-mail: %d", agenda[i].nome, agenda[i].telefone, agenda[i].email); 			
+          break;		
+					}
+          else{
+            printf("\nContato não encontrado\n");
+            break;
+          }
+			}			
+			break;
+
+			case 2:
+			printf("\nDigite o nome para achar o contato: ");
+			scanf("%s", apc);
+			for(int i=0;i<qtdContato;i++){
+					if(apc == agenda[i].nome){
+						printf("\nNome: %s \nTelefone: %s \nE-mail: %d", agenda[i].nome,agenda[i].telefone, agenda[i].email); 
+            break;
+					}
+          else{
+            printf("Contato não encontrado\n");
+            break;
+          }
+			}
+			break;
+      } while(op != 0);
+      break;
+      } while(op != 0);
+      break;
+
+			case 4:
+			printf("\nDigite o nome da conta para remover: ");
+      scanf("%i", &nomeContato);
+      for(int i = 0; i < qtdContato; i++) {
+        if(agenda[i].nome == nomeContato) {
+          break;
+        }
+      }
+        while(i < qtdContato-1) {
+          agenda[i] = agenda[i + 1];
+        }
+        qtdContato--;
+			break;
+
+      case 5:
+        for(i=0;i < qtdContato;i++){
+        printf("\n---------------------------------\n");
+				printf("Nome: %s", agenda[i].nome);
+				printf("\nTelefone: %s", agenda[i].telefone);
+				printf("\nE-mail: %d", agenda[i].email);
+				printf("\n---------------------------------\n");
+      }
+			break;		
+    } 
+  } while(op != 0);
+  return 0;
+}
